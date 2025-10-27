@@ -538,7 +538,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// --------------- Professional Model ----------------
+// ------------------- Professional Model ---------------------
 class Professional {
   final String title;
   final String name;
