@@ -1,9 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import '../widgets/job_card.dart';
-import '../widgets/header_area.dart';
-import '../data/dummy_data.dart';
-import '../models/professional.dart';
+import '../utils/imports.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -90,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _buildHomeTab(),
     _buildSearchTab(),
     _buildLikesTab(),
-    _buildProfileTab(),
+    Myprofile(),
   ];
 
   @override
@@ -257,9 +253,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   // ---------------- PROFILE TAB ----------------
-  Widget _buildProfileTab() {
-    return const Center(child: Text("Profile Tab"));
-  }
+  //call the widget Myprofile from myprofile.dart
 
   // ---------------- CATEGORY BUTTON ----------------
   Widget _buildCategoryButton(String text) {

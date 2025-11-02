@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import '../models/professional.dart';
+import '../utils/imports.dart';
 
 class JobCard extends StatefulWidget {
   final Professional professional;

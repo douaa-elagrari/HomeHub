@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import '../widgets/job_card.dart';
-import '../models/professional.dart';
+import '../utils/imports.dart';
 
 class LikesScreen extends StatelessWidget {
   final List<Professional> favorites;
@@ -15,8 +13,9 @@ class LikesScreen extends StatelessWidget {
             padding: const EdgeInsets.only(top: 60),
             child: SingleChildScrollView(
               child: Column(
-                children:
-                    favorites.map((p) => JobCard(professional: p)).toList(),
+                children: favorites
+                    .map((p) => JobCard(professional: p))
+                    .toList(),
               ),
             ),
           );
