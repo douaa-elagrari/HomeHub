@@ -42,7 +42,7 @@ class _MyprofileState extends State<Myprofile> {
 
       appBar: AppBar(
         backgroundColor: Colors.white,
-        automaticallyImplyLeading: false, // 👈 Removes the back button
+        automaticallyImplyLeading: false,
         title: const Text(
           'My Profile',
           style: TextStyle(

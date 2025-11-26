@@ -1,26 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/job_card.dart';
 import '../models/professional.dart';
 import '../widgets/header_top_row.dart';
-class LikesScreen extends StatelessWidget {
-  final List<Professional> favorites;
+import '../cubit/likes_cubit.dart';
 
-  const LikesScreen({super.key, required this.favorites});
+class LikesScreen extends StatelessWidget {
+  final List<Professional> initialFavorites;
+
+  const LikesScreen({super.key, required this.initialFavorites});
 
   @override
   Widget build(BuildContext context) {
-    return favorites.isEmpty
-        ? const Center(child: Text("No favorites yet!"))
-        : Padding(
-            padding: const EdgeInsets.only(top: 60),
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.fromLTRB(16, 30, 16, 16),
-              child: Column(
-                children: favorites
-                    .map((p) => JobCard(professional: p))
-                    .toList(),
-              ),
+    return BlocProvider(
+      create: (_) => LikesCubit()..setFavorites(initialFavorites),
+      child: BlocBuilder<LikesCubit, List<Professional>>(
+        builder: (context, favorites) {
+          if (favorites.isEmpty) {
+            return const Center(child: Text("No favorites yet!"));
+          }
+
+          return Scaffold(
+            body: ListView.builder(
+              padding: const EdgeInsets.fromLTRB(16, 60, 16, 16),
+              itemCount: favorites.length,
+              itemBuilder: (_, index) {
+                final p = favorites[index];
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: JobCard(professional: p),
+                );
+              },
             ),
           );
+        },
+      ),
+    );
   }
 }

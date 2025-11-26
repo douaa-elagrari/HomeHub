@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lab4_mob/screens/home_screen_pro.dart';
-import 'package:lab4_mob/screens/signin_pro.dart';
-import 'screens/home_screen.dart';
+import 'screens/signup_pro.dart';
+import 'screens/search_screen_pro.dart';
+import 'screens/signin_pro.dart';
+import 'screens/signup.dart';
+import 'screens/search_screen.dart';
 import 'screens/splashscreen.dart';
 import 'screens/firstpage.dart';
 import 'screens/secondpage.dart';
@@ -44,10 +46,16 @@ class MyApp extends StatelessWidget {
             return MaterialPageRoute(builder: (_) => HomeScreen());
 
           case '/signin_pro':
-            return MaterialPageRoute(builder: (_) => SigninPro());  
+            return MaterialPageRoute(builder: (_) => SigninPro());
 
           case '/home_screen_pro':
-            return MaterialPageRoute(builder: (_) => HomeScreenPro());    
+            return MaterialPageRoute(builder: (_) => HomeScreenPro());
+
+          case '/signup':
+            return MaterialPageRoute(builder: (_) => Signup());
+
+          case '/signup_pro':
+            return MaterialPageRoute(builder: (_) => SignupPro());
 
           default:
             return MaterialPageRoute(

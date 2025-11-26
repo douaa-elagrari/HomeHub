@@ -9,10 +9,7 @@ class Signin extends StatefulWidget {
 }
 
 class _SigninState extends State<Signin> {
-  // Global key to track form state
   final _formKey = GlobalKey<FormState>();
-
-  // Controllers for text fields
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -21,167 +18,169 @@ class _SigninState extends State<Signin> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 40),
-
-            // Back button
-            IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(Icons.chevron_left, size: 35),
+      body: Center(
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: 400, // max width for larger screens
             ),
-
-            const SizedBox(height: 50),
-
-            // Form Container
-            Center(
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 40,
-                  horizontal: 30,
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 30),
+              margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(
+                  color: Colors.grey.withOpacity(0.5),
+                  width: 1,
                 ),
-                margin: const EdgeInsets.symmetric(
-                  vertical: 30,
-                  horizontal: 20,
-                ),
-                width: 400,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(
-                    color: Colors.grey.withOpacity(0.5),
-                    width: 1,
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    blurRadius: 2,
+                    spreadRadius: 2,
+                    offset: const Offset(0, 3),
                   ),
-                  borderRadius: BorderRadius.circular(15),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.3),
-                      blurRadius: 2,
-                      spreadRadius: 2,
-                      offset: const Offset(0, 3),
+                ],
+              ),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Text(
+                        'Sign In',
+                        style: TextStyle(
+                          color: Color(0xFF004E98),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 28,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 25),
+
+                    // Username
+                    TextFormField(
+                      controller: _usernameController,
+                      decoration: InputDecoration(
+                        labelText: 'User Name',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'Please enter your username';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 15),
+
+                    // Phone number
+                    TextFormField(
+                      controller: _phoneController,
+                      keyboardType: TextInputType.phone,
+                      decoration: InputDecoration(
+                        labelText: 'Phone Number',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'Please enter your phone number';
+                        } else if (!RegExp(
+                          r'^(05|06|07)[0-9]{8}$',
+                        ).hasMatch(value.trim())) {
+                          return 'Enter a valid 10-digit phone number';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 15),
+
+                    // Password
+                    TextFormField(
+                      controller: _passwordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'Please enter your password';
+                        } else if (value.trim().length < 6) {
+                          return 'Password must be at least 6 characters';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 10),
+
+                    // Forgot password
+                    Center(
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/verification');
+                        },
+                        child: Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                            color: Color(0xFF004E98),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    Center(
+                      child: Mybutton(
+                        text: 'Sign In',
+                        bgcolor: Color(0xFF004E98),
+                        fgcolor: Colors.white,
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                           Navigator.pushNamed(context, '/homescreen');
+                          }
+                        },
+                      ),
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    // Sign up prompt
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Don't have an account? "),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/signup');
+                          },
+                          child: Text(
+                            'Sign Up',
+                            style: TextStyle(
+                              color: Color(0xFF004E98),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Title
-                      const Center(
-                        child: Text(
-                          'Sign In',
-                          style: TextStyle(
-                            color: Color(0xFF004E98),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 28,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 25),
-
-                      // Username
-                      const Text('User Name'),
-                      const SizedBox(height: 5),
-                      SizedBox(
-                        width: 350,
-                        height: 50,
-                        child: TextFormField(
-                          controller: _usernameController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.trim().isEmpty) {
-                              return 'Please enter your username';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      const SizedBox(height: 15),
-
-                      // Phone number
-                      const Text('Phone Number'),
-                      const SizedBox(height: 5),
-                      SizedBox(
-                        width: 350,
-                        height: 50,
-                        child: TextFormField(
-                          controller: _phoneController,
-                          keyboardType: TextInputType.phone,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.trim().isEmpty) {
-                              return 'Please enter your phone number';
-                            } else if (!RegExp(
-                              r'^(05|06|07)[0-9]{8}$',
-                            ).hasMatch(value.trim())) {
-                              return 'Enter a valid 10-digit phone number ';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      const SizedBox(height: 15),
-
-                      // Password
-                      const Text('Password'),
-                      const SizedBox(height: 5),
-                      SizedBox(
-                        width: 350,
-                        height: 50,
-                        child: TextFormField(
-                          controller: _passwordController,
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.trim().isEmpty) {
-                              return 'Please enter your password';
-                            } else if (value.trim().length < 6) {
-                              return 'Password must be at least 6 characters';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-
-                      // Submit button
-                      Center(
-                        child: Mybutton(
-                          text: 'Sign In',
-                          bgcolor: const Color(0xFF004E98),
-                          fgcolor: Colors.white,
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              // All fields valid
-                              Navigator.pushNamed(context, '/verification');
-                            }
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
               ),
             ),
-          ],
+          ),
         ),
       ),
     );

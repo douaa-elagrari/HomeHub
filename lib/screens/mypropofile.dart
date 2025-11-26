@@ -76,11 +76,11 @@ class _MyproprofileState extends State<Myproprofile> {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              const PortfolioServiceProvider(), // ✅ Navigate here
+                              const PortfolioServiceProvider(),
                         ),
                       );
                     } else if (sentences[i] == 'Logout') {
-                      // Handle logout logic here if needed
+                      Navigator.pushNamed(context, '/signin_pro');
                     }
                   },
                   child: Container(
