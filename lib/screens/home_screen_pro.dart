@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lab4_mob/screens/documentation_screen.dart';
 import 'package:lab4_mob/screens/homescreen.dart';
 import 'package:lab4_mob/screens/myprofile.dart';
+import 'package:lab4_mob/screens/mypropofile.dart';
 import '../data/dummy_data.dart';
 import '../models/professional.dart';
 import '../models/product.dart';
@@ -12,16 +14,16 @@ import '../models/saved_item.dart';
 import 'myprofile.dart';
 import '../widgets/likes_tab.dart';
 import '../widgets/home_header.dart';
-import '../widgets/custom_bottom_nav.dart';
+import '../widgets/custom_bottom_nav_pro.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomeScreenPro extends StatefulWidget {
+  const HomeScreenPro({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeScreenPro> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreenPro> {
   int _selectedIndex = 0;
 
   final TextEditingController _searchController = TextEditingController();
@@ -94,9 +96,9 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> get pages => [
     HomScreen(),
     _buildHomeTab(),
-    LikesTab(likedItems: likedItems,username: 'Douaa Elagrari' ),
-    // _buildLibraryTab(),
-    Myprofile(),
+    LikesTab(likedItems: likedItems,username: 'Douaa Elagrari'),
+    DocumentationScreen(),
+    Myproprofile()
   ];
 
   @override
@@ -211,3 +213,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+
+

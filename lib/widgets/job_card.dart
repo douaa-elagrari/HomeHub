@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lab4_mob/screens/portfoliouserview.dart';
 import '../models/professional.dart';
 import '../models/saved_item.dart';
-import '../screens/home_screen.dart';
 
 class JobCard extends StatefulWidget {
   final Professional professional;
@@ -45,14 +45,21 @@ class _JobCardState extends State<JobCard> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(widget.professional.title,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 16)),
+                          Text(
+                            widget.professional.title,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
                           Text(widget.professional.name),
-                          Text(widget.professional.price,
-                              style: const TextStyle(
-                                  color: Color(0xFFFF6700),
-                                  fontWeight: FontWeight.bold)),
+                          Text(
+                            widget.professional.price,
+                            style: const TextStyle(
+                              color: Color(0xFFFF6700),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                           Row(
                             children: [
                               const Icon(Icons.location_pin, size: 14),
@@ -70,7 +77,14 @@ class _JobCardState extends State<JobCard> {
                   children: [
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Portfolio(),
+                            ),
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFFE2E2E2),
                           foregroundColor: Colors.white,
@@ -98,13 +112,13 @@ class _JobCardState extends State<JobCard> {
                           padding: const EdgeInsets.symmetric(vertical: 12),
                         ),
                         child: const Text(
-                          "BOOK",
+                          "Contact",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),
@@ -127,8 +141,12 @@ class _JobCardState extends State<JobCard> {
                 if (likedItems.any((l) => l.item == widget.professional)) {
                   likedItems.removeWhere((l) => l.item == widget.professional);
                 } else {
-                  likedItems.add(SavedItem(
-                      type: SavedType.service, item: widget.professional));
+                  likedItems.add(
+                    SavedItem(
+                      type: SavedType.service,
+                      item: widget.professional,
+                    ),
+                  );
                 }
               });
             },

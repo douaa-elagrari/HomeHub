@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import '../screens/descriptionscreens.dart';
 import '../models/product.dart';
 import '../models/saved_item.dart';
-import '../screens/home_screen.dart';
 
 class ProductCard extends StatefulWidget {
   final Product product;
@@ -26,12 +26,11 @@ class _ProductCardState extends State<ProductCard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // IMAGE
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: Image.asset(
                   widget.product.image,
-                  height: 140,
+                  height: 132,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
@@ -59,7 +58,7 @@ class _ProductCardState extends State<ProductCard> {
                         Text(
                           "(${widget.product.reviews})",
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 10,
                             color: Colors.grey[600],
                           ),
                         ),
@@ -72,7 +71,7 @@ class _ProductCardState extends State<ProductCard> {
                     Text(
                       widget.product.name,
                       style: const TextStyle(
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -86,14 +85,25 @@ class _ProductCardState extends State<ProductCard> {
                         Text(
                           widget.product.price,
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 14,
                             color: Color(0xFFFF6700),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const Icon(
-                          Icons.shopping_cart,
-                          color: Color(0xFFFF6700),
+                        IconButton(
+                          icon: const Icon(
+                            Icons.shopping_cart,
+                            color: Color(0xFFFF6700),
+                            size: 25,
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ProductLayout(),
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),

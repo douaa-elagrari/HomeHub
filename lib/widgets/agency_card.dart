@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lab4_mob/screens/portfolioagencyuserview.dart';
 import '../models/agency.dart';
 import '../models/saved_item.dart';
-import '../screens/home_screen.dart';
 
 class AgencyCard extends StatefulWidget {
   final Agency agency;
@@ -77,7 +77,15 @@ class _AgencyCardState extends State<AgencyCard> {
                   alignment: Alignment.centerRight,
                   child: Center(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                PortfolioAgency(agency: widget.agency),
+                          ),
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF004E98),
                         foregroundColor: Colors.white,

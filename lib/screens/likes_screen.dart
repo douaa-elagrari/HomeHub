@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/job_card.dart';
 import '../models/professional.dart';
-
+import '../widgets/header_top_row.dart';
 class LikesScreen extends StatelessWidget {
   final List<Professional> favorites;
 
