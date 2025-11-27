@@ -1,16 +1,4 @@
-import 'package:flutter/material.dart';
-import 'screens/signup_pro.dart';
-import 'screens/search_screen_pro.dart';
-import 'screens/signin_pro.dart';
-import 'screens/signup.dart';
-import 'screens/search_screen.dart';
-import 'screens/splashscreen.dart';
-import 'screens/firstpage.dart';
-import 'screens/secondpage.dart';
-import 'screens/thirdpage.dart';
-import 'screens/signin.dart';
-import 'screens/verification.dart';
-import 'screens/welcome.dart';
+import '../../utils/utils.dart';
 
 void main() {
   runApp(const MyApp());
